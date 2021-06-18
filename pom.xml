@@ -128,7 +128,7 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-core</artifactId>
-            <version>1.11.154</version>
+            <version>1.11.883</version>
             <exclusions>
                 <exclusion>
                     <groupId>software.amazon.ion</groupId>
@@ -152,17 +152,17 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>testcontainers</artifactId>
-            <version>1.7.2</version>
+            <version>1.10.3</version>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>jdbc</artifactId>
-            <version>1.7.2</version>
+            <version>1.10.3</version>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>postgresql</artifactId>
-            <version>1.7.2</version>
+            <version>1.12.1</version>
         </dependency>
 
         <!-- Test -->
