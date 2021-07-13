@@ -1,10 +1,6 @@
 server:
   port: 1234
 
-auth:
-  jwt:
-   publicKeyUrl: "https://ego-qa.kidsfirstdrc.org/oauth/token/public_key"
-
 spring:
   jpa:
     show-sql: true
@@ -19,13 +15,21 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/riff
     username: postgres
-    password:
+    password: postgres
     driver-class-name: org.postgresql.Driver
   flyway:
     enabled: false
 
 riff:
   urlKey: longUrl
+
+keycloak:
+  realm: "KidsFirst"
+  auth-server-url: "http://localhost:8080/auth"
+  ssl-required: "external"
+  resource: "riff"
+  bearer-only: true
+  confidential-port: 0
 
 ---
 
@@ -55,3 +59,12 @@ spring.datasource:
 
 riff:
   urlKey: longUrl
+
+keycloak:
+  realm: "master"
+  realm-key: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhPHTbpUgpyRTFCFTzlKGZ9/kgXER70SsiNrYV5B5zaT82+PjSHXX+s1MlwZujo0cjT+hfMP1BVojfqmVIMyS3r1Vw9u+H/yt4BnJL+1oT0wZzNJYVV67M03l+AI0fnqkPkv77S12K2qFpvfy7DaO7c0hLIHLBDv++Bwkuw1Qwp/ZaTFHMDiRMcDm8FjWGhkmYzH8A/OjBDGSvkrq8OEXSoptiDD9X4pPcUVdfVPdM38JfjmxHi9k1rGdCHlKSbOHWlp4/xi+L3xuFRqdebuOlVF6KUErb+a25RWupGMe9RO5yh7Do7SCfvn9UWBamwpK56D12yaIwJiPll6UmJyFEwIDAQAB"
+  auth-server-url: "http://localhost:8123/auth"
+  ssl-required: "external"
+  resource: "riff"
+  bearer-only: true
+  confidential-port: 0
