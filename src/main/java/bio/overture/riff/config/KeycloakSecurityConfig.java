@@ -37,7 +37,7 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
         super.configure(http);
         http.authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/v2/api-docs").permitAll()
+                .antMatchers(HttpMethod.GET, "/swagger**", "/swagger-resources/**", "/v2/api**", "/webjars/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/riff/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/s/*").permitAll()
                 .anyRequest()

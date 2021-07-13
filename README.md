@@ -26,7 +26,7 @@
 
 ## Features
 
-See: `/v2/api-docs` endpoint for API documentation
+See: https://kf-strides-riff.kidsfirstdrc.org/swagger-ui.html for API documentation
 
 ## Requirements
 
@@ -115,7 +115,7 @@ Feel free to add integration tests in it if needed.
 
 ## API
 
-See https://kf-strides-riff.kidsfirstdrc.org/v2/api-docs
+See https://kf-strides-riff.kidsfirstdrc.org/swagger-ui.html
 
 ## Acknowledgements
 
