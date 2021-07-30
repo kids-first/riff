@@ -1,8 +1,8 @@
-@Library(value='kids-first/aws-infra-jenkins-shared-libraries', changelog=false) _
+@Library(value='kids-first/aws-infra-jenkins-shared-libraries@feature/integrate-igor', changelog=false) _
 ecs_service_type_1_standard {
     projectName = "riff"
     agentLabel = "terraform-testing"
-    environments = "qa,prd"
+    environments = "dev,qa,prd"
     docker_image_type = "alpine"
     entrypoint_command = "/srv/riff/exec/run.sh"
     quick_deploy = "true"
