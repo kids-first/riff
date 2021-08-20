@@ -13,7 +13,7 @@ spring:
           use_jdbc_metadata_defaults: false
         dialect: com.marvinformatics.hibernate.json.PostgreSQLJsonDialect
   datasource:
-    url: jdbc:postgresql://localhost:5432/riff
+    url: jdbc:postgresql://postgres:5432/riff
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -24,10 +24,10 @@ riff:
   urlKey: longUrl
 
 keycloak:
-  realm: "KidsFirst"
-  auth-server-url: "http://localhost:8080/auth"
+  realm: "KidsFirst-test-CPE"
+  auth-server-url: "https://kf-keycloak-qa.kf-strides.org/auth"
   ssl-required: "external"
-  resource: "riff"
+  resource: "kidsfirst-apis"
   bearer-only: true
   confidential-port: 0
 
