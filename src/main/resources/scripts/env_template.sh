@@ -19,3 +19,8 @@ export RIFF_DB_PASS=
 # === App Server Config
 export RIFF_ACTIVE_PROFILES="default"
 export RIFF_SERVER_PORT=8081
+
+# === Keycloak configs
+export KEYCLOAK_REALM=
+export KEYCLOAK_URL=
+export KEYCLOAK_CLIENT=

@@ -13,9 +13,9 @@ spring:
           use_jdbc_metadata_defaults: false
         dialect: com.marvinformatics.hibernate.json.PostgreSQLJsonDialect
   datasource:
-    url: jdbc:postgresql://postgres:5432/riff
+    url: jdbc:postgresql://localhost:5432/riff
     username: postgres
-    password: postgres
+    password:
     driver-class-name: org.postgresql.Driver
   flyway:
     enabled: false
