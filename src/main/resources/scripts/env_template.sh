@@ -7,6 +7,9 @@
 # === Install Path
 export RIFF_INSTALL_PATH=
 
+# === Cors Allowed domains
+export RIFF_CORS_ALLOWED_DOMAINS=
+
 # === DB Config
 export RIFF_DB=riff
 export RIFF_DB_HOST=localhost
