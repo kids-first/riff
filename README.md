@@ -36,7 +36,7 @@ The application can be run locally or in a docker container, the requirements fo
 
 A running instance of [Keycloak](https://www.keycloak.org/) is required to generate the Authorization tokens and to verify the tokens.
 
-[Keycloak](https://www.keycloak.org/) can be run locally in a docker container see [here](https://www.keycloak.org/getting-started/getting-started-docker).
+[Keycloak](https://www.keycloak.org/) can be run locally in a docker container see [here](https://www.keycloak.org/getting-started/getting-started-docker) or you can use the QA instance.
 
 ### Local
 
