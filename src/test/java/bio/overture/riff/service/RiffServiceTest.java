@@ -161,4 +161,26 @@ public class RiffServiceTest {
         assertThat(isDeleted).isFalse();
 
     }
+
+    @Test
+    public void deletePhantomSets(){
+        val req = new ShortenRequest();
+        req.setAlias("");
+        req.setContent(ImmutableMap.of("thing", "value"));
+        req.setSharedPublicly(false);
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        req.setCreationDate(cal.getTime());
+        val adminUser = getJwtUser(Collections.singletonList(JWTAuthorizationFilter.ADMIN_ROLE), UID2);
+        service.makeRiff(adminUser, req);
+        int deletedPhantomSets = service.deletePhantomSets(adminUser);
+        assertThat(deletedPhantomSets).isGreaterThan(0);
+        deletedPhantomSets = service.deletePhantomSets(adminUser);
+        assertThat(deletedPhantomSets).isEqualTo(0);
+    }
+
+    @Test
+    public void deletePhantomSetsNotAuthorized(){
+        assertThatThrownBy(() -> service.deletePhantomSets(user)).isInstanceOf(UnauthorizedUserException.class);
+    }
 }

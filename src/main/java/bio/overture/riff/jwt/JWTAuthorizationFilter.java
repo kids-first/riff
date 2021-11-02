@@ -57,4 +57,8 @@ public class JWTAuthorizationFilter extends GenericFilterBean {
     chain.doFilter(request, response);
   }
 
+  public static boolean isAdmin(JWTUser user) {
+    return user.getRoles().contains(ADMIN_ROLE);
+  }
+
 }
