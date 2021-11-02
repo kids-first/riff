@@ -18,25 +18,30 @@
 package bio.overture.riff.service;
 
 import bio.overture.riff.exception.RiffNotFoundException;
+import bio.overture.riff.jwt.JWTAuthorizationFilter;
 import bio.overture.riff.jwt.JWTUser;
 import bio.overture.riff.model.ShortenRequest;
 import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.assertj.core.util.Lists;
+import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.oauth2.common.exceptions.UnauthorizedUserException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 
 @Slf4j
 @SpringBootTest
@@ -54,14 +59,7 @@ public class RiffServiceTest {
 
     @Before
     public void setUp() {
-        this.user = new JWTUser();
-        user.setUid(UID);
-        user.setRoles(Lists.emptyList());
-        user.setCreatedAt(DateTime.now().toString());
-        user.setFirstName("Foo");
-        user.setLastName("Bar");
-        user.setName("Foo Bar");
-        user.setEmail("foobar@test.org");
+        this.user = getJwtUser(Lists.emptyList(), UID);
 
         if (setupDone) {
             return;
@@ -81,20 +79,26 @@ public class RiffServiceTest {
         val resp2 = service.makeRiff(user, req2);
         assert (resp != null && resp2 != null);
 
-        val user2 = new JWTUser();
-        user2.setUid(UID2);
-        user2.setRoles(Lists.emptyList());
-        user2.setCreatedAt(DateTime.now().toString());
-        user2.setFirstName("Another");
-        user2.setLastName("User");
-        user2.setName("Another User");
-        user2.setEmail("anotheruser@test.org");
+        final JWTUser user2 = getJwtUser(Lists.emptyList(), UID2);
         val req3 = new ShortenRequest();
         req3.setAlias("Alias 3");
         req3.setContent(ImmutableMap.of("thing", "value"));
         req3.setSharedPublicly(false);
         service.makeRiff(user2, req3);
         setupDone = true;
+    }
+
+    @NotNull
+    private JWTUser getJwtUser(List<String> roles, final String UID) {
+        val user = new JWTUser();
+        user.setUid(UID);
+        user.setRoles(roles);
+        user.setCreatedAt(DateTime.now().toString());
+        user.setFirstName("Another");
+        user.setLastName("User");
+        user.setName("Another User");
+        user.setEmail("anotheruser@test.org");
+        return user;
     }
 
     @Test

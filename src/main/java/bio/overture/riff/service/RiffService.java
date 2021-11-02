@@ -18,20 +18,25 @@
 package bio.overture.riff.service;
 
 import bio.overture.riff.exception.RiffNotFoundException;
+import bio.overture.riff.jwt.JWTAuthorizationFilter;
 import bio.overture.riff.jwt.JWTUser;
 import bio.overture.riff.model.Riff;
 import bio.overture.riff.model.RiffResponse;
 import bio.overture.riff.model.ShortenRequest;
 import bio.overture.riff.repository.RiffRepository;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.common.exceptions.UnauthorizedUserException;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class RiffService {
 
@@ -62,7 +67,7 @@ public class RiffService {
                 .uid(user.getUid())
                 .alias(request.getAlias())
                 .sharedPublicly(request.isSharedPublicly())
-                .creationDate(new Date())
+                .creationDate(request.getCreationDate() == null? new Date() : request.getCreationDate())
                 .updatedDate(new Date())
                 .build();
 
@@ -79,6 +84,17 @@ public class RiffService {
                     return true;
                 })
                 .orElse(false);
+    }
+
+    public int deletePhantomSets(JWTUser user) {
+        if(!JWTAuthorizationFilter.isAdmin(user)) {
+            throw new UnauthorizedUserException("Unauthorized user");
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+
+        return repository.deleteByAliasAndCreationDateBefore("", cal.getTime());
     }
 
     @SneakyThrows

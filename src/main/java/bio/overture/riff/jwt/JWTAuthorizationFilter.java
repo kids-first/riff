@@ -32,7 +32,7 @@ import javax.servlet.ServletResponse;
 public class JWTAuthorizationFilter extends GenericFilterBean {
 
   private final String USER_ROLE = "USER";
-  private final String ADMIN_ROLE = "ADMIN";
+  public static final String ADMIN_ROLE = "ADMIN";
 
   private final String APPROVED_STATUS = "Approved";
   private final String PENDING_STATUS = "Pending";
@@ -46,7 +46,7 @@ public class JWTAuthorizationFilter extends GenericFilterBean {
       val details = (OAuth2AuthenticationDetails) authentication.getDetails();
       val user = (JWTUser) details.getDecodedDetails();
 
-      boolean hasCorrectRole = user.getRoles().contains(USER_ROLE) || user.getRoles().contains(ADMIN_ROLE);
+      boolean hasCorrectRole = user.getRoles().contains(USER_ROLE) || isAdmin(user);
       boolean hasCorrectStatus = user.getStatus().equalsIgnoreCase(APPROVED_STATUS) || user.getStatus().equalsIgnoreCase(PENDING_STATUS);
 
       if (!hasCorrectRole || !hasCorrectStatus) {
