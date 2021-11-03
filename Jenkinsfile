@@ -1,9 +1,6 @@
 @Library(value='kids-first/aws-infra-jenkins-shared-libraries', changelog=false) _
 ecs_service_type_1_standard {
     projectName = "riff"
-    projectPrefix = "-keycloak"
-    secrets_location = "riff"
-    main_branch = "keycloak"
     agentLabel = "terraform-testing"
     environments = "dev,qa,prd"
     docker_image_type = "alpine"
